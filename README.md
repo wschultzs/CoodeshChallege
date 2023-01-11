@@ -1,5 +1,5 @@
-### TÍTULO: FrontEnd Challenge da Coodesh
-    Um projeto de listagem e favoritação de palavras em inglês. 
+### FrontEnd Challenge da Coodesh
+    Um projeto de listagem e marcação de palavras em inglês. 
 
 ### TECNOLOGIAS UTILIZADAS
     - React.js

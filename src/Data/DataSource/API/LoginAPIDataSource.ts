@@ -7,14 +7,15 @@ interface TypedResponse<T = any> extends Response {
     json<P = T>(): Promise<P>;
 }
 
-function myFetch<T>(body: any, ...args: any): Promise<TypedResponse<T>> {
-    console.log(body)
+function myFetch<T>(body: Auth, ...args: any): Promise<TypedResponse<T>> {
+    localStorage.setItem('user', body.email);    
+
     return fetch.apply(window, args);
 }
 
 export default class LoginAPIDataSourceImpl implements LoginDataSource {
     async login(email: string, password: string): Promise<Auth> {
-        const body = { email, password };
+        const body: Auth = { email, password };
 
         let response = await myFetch<Auth>(body, `${BASE_URL}/login`);
 

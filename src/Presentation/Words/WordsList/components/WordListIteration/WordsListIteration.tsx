@@ -18,16 +18,11 @@ export default function WordsListIteration({
 
     return (
         <>
-            <Grid container spacing={4}>
+            {words.length > 0 ? (<Grid container spacing={4}>
                 {words?.map((word) => (
-                    <Grid item xs={12} sm={4}>
+                    <Grid key={word.id} item xs={12} sm={4}>
                         <Typography
-                            sx={{
-                                border: "1px solid black",
-                                borderRadius: "15px",
-                                padding: "10px",
-                                cursor: "pointer",
-                            }}
+                            className={classes.word}
                             onClick={() => setWordInView(word)}
                         >
                             {word.word}
@@ -49,7 +44,10 @@ export default function WordsListIteration({
                         </Typography>
                     </Grid>
                 ))}
-            </Grid>
+            </Grid>) : (
+                <Typography>There are no favorite words yet.</Typography>
+            )}
+            
         </>
     );
 }

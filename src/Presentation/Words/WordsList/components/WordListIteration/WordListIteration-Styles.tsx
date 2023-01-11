@@ -2,10 +2,15 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        container: {},
+        word: {
+            border: "1px solid black",
+            borderRadius: "15px",
+            padding: "10px",
+            cursor: "pointer",
+        },
         favoriteIcon: {
-            float: 'right',
-            cursor: 'pointer'
-        }
+            float: "right",
+            cursor: "pointer",
+        },
     })
 );

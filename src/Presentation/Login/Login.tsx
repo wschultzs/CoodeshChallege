@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import useViewModel from "./LoginModel";
 import {
     Grid,
@@ -10,20 +10,29 @@ import {
 } from "@mui/material";
 import { useStyles } from "./Login-Styles";
 import { Login, Email, Key, CodeRounded } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const { loginUser } = useViewModel();
 
-    const [email, setEmail] = useState('')
+    const navigate = useNavigate();
 
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState("");
+
+    const [password, setPassword] = useState("");
 
     const classes = useStyles();
 
-    const handleSubmit = (e: any) => {
+    useEffect(() => {
+        localStorage.removeItem('user');
+    }, [])
+
+    const handleSubmit = async (e: any) => {        
         e.preventDefault();
 
-        loginUser(email, password);
+        await loginUser(email, password);
+
+        navigate('/words');
     };
 
     return (
@@ -44,7 +53,7 @@ export default function LoginPage() {
                             variant="outlined"
                             required
                             type="email"
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -58,11 +67,11 @@ export default function LoginPage() {
                     <Grid item xs={12}>
                         <TextField
                             id="password"
-                            label={"Password"}                            
+                            label={"Password"}
                             variant="outlined"
                             required
                             type="password"
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">

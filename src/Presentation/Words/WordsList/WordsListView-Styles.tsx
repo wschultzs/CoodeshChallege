@@ -7,6 +7,6 @@ export const useStyles = makeStyles((theme: Theme) =>
             justifyContent: "space-around",
             alignItems: 'center',
             minHeight: '100vh'
-        },
+        }
     })
 );

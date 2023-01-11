@@ -1,4 +1,5 @@
 import { useEffect, useState, SyntheticEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import useViewModel from "./WordsListViewModel";
 import { Grid, Box, Tab } from "@mui/material";
 import TabContext from "@mui/lab/TabContext";
@@ -20,8 +21,11 @@ export default function WordsListView() {
 
     const [wordInView, setWordInView] = useState<Words>({} as Words);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        getWords();
+        if (localStorage.getItem("user")) getWords();
+        else navigate("/");
     }, []);
 
     const handleChange = (event: SyntheticEvent, newValue: string) => {
@@ -33,15 +37,15 @@ export default function WordsListView() {
             (favorite: Words) => favorite.id === word.id
         );
 
-        if (alreadyFav) removeFromFavorites(word);        
+        if (alreadyFav) removeFromFavorites(word);
         else {
-            word.isFavorite = true
+            word.isFavorite = true;
             setFavoriteWords((prev) => [word, ...prev]);
         }
     };
 
     const removeFromFavorites = (word: Words) => {
-        word.isFavorite = false
+        word.isFavorite = false;
         setFavoriteWords((prev) =>
             prev.filter((words: Words) => words.id !== word.id)
         );
